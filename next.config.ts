@@ -15,7 +15,6 @@ const testCfg = {
 
 const prodCfg = {
   basePath: "",
-  devIndicators: false,
   env: {
     completeUrl: process.env.COMPLETE_URL,
     API_URL: `${process.env.COMPLETE_URL}/api`,
