@@ -171,11 +171,7 @@ export default function Usuarios() {
         if (modalMode === 'create') {
             if (!formData.senha) {
                 newErrors.senha = 'Senha é obrigatória';
-            } else if (formData.senha.length < 4) {
-                newErrors.senha = 'Senha deve ter no mínimo 4 caracteres';
             }
-        } else if (formData.senha && formData.senha.length < 4) {
-            newErrors.senha = 'Senha deve ter no mínimo 4 caracteres';
         }
 
         setErrors(newErrors);

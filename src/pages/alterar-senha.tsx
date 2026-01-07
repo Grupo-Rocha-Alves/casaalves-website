@@ -49,8 +49,6 @@ export default function AlterarSenha() {
 
         if (!novaSenha) {
             newErrors.novaSenha = 'Nova senha é obrigatória';
-        } else if (novaSenha.length < 4) {
-            newErrors.novaSenha = 'Nova senha deve ter no mínimo 4 caracteres';
         }
 
         if (!confirmarNovaSenha) {
