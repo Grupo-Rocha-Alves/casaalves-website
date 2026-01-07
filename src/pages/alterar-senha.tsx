@@ -1,9 +1,9 @@
 import { useState, FormEvent, useEffect } from 'react';
-import { useAuth } from '../features/auth/context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/router';
-import { Button } from '../components/ui/Button';
-import { Input } from '../components/ui/Input';
-import { Card, CardContent, CardHeader } from '../components/ui/Card';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
+import { Card, CardContent, CardHeader } from '../components/Card';
 import Head from 'next/head';
 import api from '../service/api';
 import toast from 'react-hot-toast';

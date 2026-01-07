@@ -1,6 +1,6 @@
-import { useAuth } from '../features/auth/context/AuthContext';
-import { Button } from '../components/ui/Button';
-import { Card, CardContent, CardHeader } from '../components/ui/Card';
+import { useAuth } from '../context/AuthContext';
+import { Button } from '../components/Button';
+import { Card, CardContent, CardHeader } from '../components/Card';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { useEffect } from 'react';

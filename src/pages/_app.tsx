@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import { AuthProvider } from '../features/auth/context/AuthContext';
-import { Layout } from '../components/layout/Layout';
+import { AuthProvider } from '../context/AuthContext';
+import { Layout } from '../components/Layout';
 import { Toaster } from 'react-hot-toast';
 import '../styles/global.css';
 

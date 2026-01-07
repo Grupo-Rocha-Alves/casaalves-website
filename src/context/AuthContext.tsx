@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/router';
-import api from '../../../service/api';
+import api from '../service/api';
 import toast from 'react-hot-toast';
 
 interface User {

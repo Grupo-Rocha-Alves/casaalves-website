@@ -1,8 +1,8 @@
 import { useState, FormEvent } from 'react';
-import { useAuth } from '../features/auth/context/AuthContext';
-import { Button } from '../components/ui/Button';
-import { Input } from '../components/ui/Input';
-import { Card, CardContent, CardHeader } from '../components/ui/Card';
+import { useAuth } from '../context/AuthContext';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
+import { Card, CardContent, CardHeader } from '../components/Card';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Home } from 'lucide-react';
@@ -124,6 +124,9 @@ export default function Login() {
                     {/* Footer */}
                     <p className="text-center text-sm text-gray-600 mt-6">
                         © {currentYear} Grupo Rocha Alves. Todos os direitos reservados.
+                    </p>
+                    <p className="text-center text-sm text-gray-500 mt-2">
+                        Desenvolvido por <a href="https://github.com/ianfelps" target="_blank" rel="noopener noreferrer">ianfelps</a>.
                     </p>
                 </div>
             </div>

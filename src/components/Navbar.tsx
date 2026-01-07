@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useAuth } from '../../features/auth/context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { Home, Menu, X, User, Lock, LogOut } from 'lucide-react';
 
 export function Navbar() {
@@ -12,8 +12,9 @@ export function Navbar() {
 
     const navigation = [
         { name: 'Home', href: '/home' },
-        { name: 'Dashboard', href: '/dashboard' },
-        ...(isAdmin ? [{ name: 'Usuários', href: '/usuarios' }] : []),
+        { name: 'Vendas', href: '/vendas' },
+        { name: 'Despesas', href: '/despesas' },
+        ...(isAdmin ? [{ name: 'Usuários', href: '/usuarios' }, { name: 'Logs', href: '/logs' }] : []),
     ];
 
     const isActive = (path: string) => router.pathname === path;
