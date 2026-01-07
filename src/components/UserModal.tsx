@@ -2,6 +2,7 @@ import { FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { Button } from './Button';
 import { Input } from './Input';
+import { getAccessLevelLabel, ACCESS_LEVELS } from '../utils/accessLevel';
 
 interface UserFormData {
     nome: string;
@@ -85,9 +86,9 @@ export function UserModal({
                             onChange={(e) => onFormChange({ nivelAcesso: Number(e.target.value) })}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         >
-                            <option value={1}>Usuário</option>
-                            <option value={2}>Administrador</option>
-                            <option value={3}>Super Admin</option>
+                            <option value={ACCESS_LEVELS.USER}>{getAccessLevelLabel(ACCESS_LEVELS.USER)}</option>
+                            <option value={ACCESS_LEVELS.MANAGER}>{getAccessLevelLabel(ACCESS_LEVELS.MANAGER)}</option>
+                            <option value={ACCESS_LEVELS.ADMIN}>{getAccessLevelLabel(ACCESS_LEVELS.ADMIN)}</option>
                         </select>
                     </div>
 
