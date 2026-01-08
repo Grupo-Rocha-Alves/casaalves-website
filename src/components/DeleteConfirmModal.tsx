@@ -6,6 +6,7 @@ interface DeleteConfirmModalProps {
     userName?: string;
     title?: string;
     message?: string;
+    buttonText?: string;
     loading: boolean;
     onConfirm: () => void;
     onCancel?: () => void;
@@ -17,6 +18,7 @@ export function DeleteConfirmModal({
     userName,
     title = 'Confirmar Exclusão',
     message,
+    buttonText = 'Excluir',
     loading,
     onConfirm,
     onCancel,
@@ -56,9 +58,6 @@ export function DeleteConfirmModal({
                                 <p className="text-gray-700 mb-2">
                                     Tem certeza que deseja excluir o usuário <span className="font-semibold">{userName}</span>?
                                 </p>
-                                <p className="text-sm text-red-600 bg-red-50 p-3 rounded-lg border border-red-200">
-                                    ⚠️ Esta ação é irreversível e todos os dados do usuário serão permanentemente removidos.
-                                </p>
                             </>
                         ) : (
                             <p className="text-gray-600">
@@ -83,7 +82,7 @@ export function DeleteConfirmModal({
                             isLoading={loading}
                             className="flex-1 bg-red-600 hover:bg-red-700 focus:ring-red-500"
                         >
-                            Excluir Usuário
+                            {buttonText}
                         </Button>
                     </div>
                 </div>

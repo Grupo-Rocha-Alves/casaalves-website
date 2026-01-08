@@ -26,19 +26,19 @@ interface SaleModalProps {
 
 export interface SaleFormData {
     data: string;
-    totalCartao: number;
-    totalPix: number;
-    totalEspecie: number;
-    totalOutro: number;
+    totalCartao: number | '';
+    totalPix: number | '';
+    totalEspecie: number | '';
+    totalOutro: number | '';
 }
 
 export function SaleModal({ isOpen, onClose, onSubmit, loading, sale }: SaleModalProps) {
     const [formData, setFormData] = useState<SaleFormData>({
         data: '',
-        totalCartao: 0,
-        totalPix: 0,
-        totalEspecie: 0,
-        totalOutro: 0,
+        totalCartao: '',
+        totalPix: '',
+        totalEspecie: '',
+        totalOutro: '',
     });
 
     useEffect(() => {
@@ -53,25 +53,33 @@ export function SaleModal({ isOpen, onClose, onSubmit, loading, sale }: SaleModa
         } else {
             setFormData({
                 data: '',
-                totalCartao: 0,
-                totalPix: 0,
-                totalEspecie: 0,
-                totalOutro: 0,
+                totalCartao: '',
+                totalPix: '',
+                totalEspecie: '',
+                totalOutro: '',
             });
         }
     }, [sale, isOpen]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(formData);
+        onSubmit({
+            ...formData,
+            totalCartao: typeof formData.totalCartao === 'number' ? formData.totalCartao : 0,
+            totalPix: typeof formData.totalPix === 'number' ? formData.totalPix : 0,
+            totalEspecie: typeof formData.totalEspecie === 'number' ? formData.totalEspecie : 0,
+            totalOutro: typeof formData.totalOutro === 'number' ? formData.totalOutro : 0,
+        });
     };
 
     const calculateTotal = () => {
+        const cartao = typeof formData.totalCartao === 'number' ? formData.totalCartao : 0;
+        const pix = typeof formData.totalPix === 'number' ? formData.totalPix : 0;
+        const especie = typeof formData.totalEspecie === 'number' ? formData.totalEspecie : 0;
+        const outro = typeof formData.totalOutro === 'number' ? formData.totalOutro : 0;
+        
         return (
-            formData.totalCartao +
-            formData.totalPix +
-            formData.totalEspecie +
-            formData.totalOutro
+            cartao + pix + especie + outro
         ).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     };
 
@@ -118,7 +126,7 @@ export function SaleModal({ isOpen, onClose, onSubmit, loading, sale }: SaleModa
                                     step="0.01"
                                     min="0"
                                     value={formData.totalCartao}
-                                    onChange={(e) => setFormData({ ...formData, totalCartao: parseFloat(e.target.value) || 0 })}
+                                    onChange={(e) => setFormData({ ...formData, totalCartao: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                                     placeholder="0.00"
                                 />
                             </div>
@@ -132,7 +140,7 @@ export function SaleModal({ isOpen, onClose, onSubmit, loading, sale }: SaleModa
                                     step="0.01"
                                     min="0"
                                     value={formData.totalPix}
-                                    onChange={(e) => setFormData({ ...formData, totalPix: parseFloat(e.target.value) || 0 })}
+                                    onChange={(e) => setFormData({ ...formData, totalPix: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                                     placeholder="0.00"
                                 />
                             </div>
@@ -146,7 +154,7 @@ export function SaleModal({ isOpen, onClose, onSubmit, loading, sale }: SaleModa
                                     step="0.01"
                                     min="0"
                                     value={formData.totalEspecie}
-                                    onChange={(e) => setFormData({ ...formData, totalEspecie: parseFloat(e.target.value) || 0 })}
+                                    onChange={(e) => setFormData({ ...formData, totalEspecie: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                                     placeholder="0.00"
                                 />
                             </div>
@@ -160,7 +168,7 @@ export function SaleModal({ isOpen, onClose, onSubmit, loading, sale }: SaleModa
                                     step="0.01"
                                     min="0"
                                     value={formData.totalOutro}
-                                    onChange={(e) => setFormData({ ...formData, totalOutro: parseFloat(e.target.value) || 0 })}
+                                    onChange={(e) => setFormData({ ...formData, totalOutro: e.target.value === '' ? '' : parseFloat(e.target.value) })}
                                     placeholder="0.00"
                                 />
                             </div>

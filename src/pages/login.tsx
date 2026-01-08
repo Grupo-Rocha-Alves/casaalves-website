@@ -48,7 +48,7 @@ export default function Login() {
         setIsLoading(true);
         
         try {
-            await authLogin({ login, password: senha });
+            await authLogin({ login: login.trim(), password: senha.trim() });
         } catch (error) {
             // Erro já tratado no contexto com toast
         } finally {

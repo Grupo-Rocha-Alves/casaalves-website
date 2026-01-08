@@ -335,6 +335,7 @@ export default function Vendas() {
                 loading={loadingDelete}
                 title="Excluir Venda"
                 message="Tem certeza que deseja excluir esta venda? Esta ação não pode ser desfeita."
+                buttonText="Excluir Venda"
             />
         </>
     );
