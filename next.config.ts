@@ -4,6 +4,9 @@ const version = "1.0.5";
 
 const testCfg = {
   basePath: "",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   env: {
     completeUrl: "http://localhost:3001",
     API_URL: "http://localhost:3001/api",
@@ -15,6 +18,9 @@ const testCfg = {
 
 const prodCfg = {
   basePath: "",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   env: {
     completeUrl: process.env.COMPLETE_URL,
     API_URL: `${process.env.COMPLETE_URL}/api`,

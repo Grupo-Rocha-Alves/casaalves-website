@@ -121,10 +121,18 @@ export default function Vendas() {
 
     const handleSubmit = async (data: SaleFormData) => {
         try {
+            const apiData = {
+                data: data.data,
+                totalCartao: typeof data.totalCartao === 'number' ? data.totalCartao : undefined,
+                totalPix: typeof data.totalPix === 'number' ? data.totalPix : undefined,
+                totalEspecie: typeof data.totalEspecie === 'number' ? data.totalEspecie : undefined,
+                totalOutro: typeof data.totalOutro === 'number' ? data.totalOutro : undefined,
+            };
+            
             if (selectedSale) {
-                await updateSale(selectedSale.idVenda, data);
+                await updateSale(selectedSale.idVenda, apiData);
             } else {
-                await createSale(data);
+                await createSale(apiData);
             }
             handleCloseModal();
             loadSales();
