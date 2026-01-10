@@ -128,7 +128,7 @@ export default function Vendas() {
                 totalEspecie: typeof data.totalEspecie === 'number' ? data.totalEspecie : undefined,
                 totalOutro: typeof data.totalOutro === 'number' ? data.totalOutro : undefined,
             };
-            
+
             if (selectedSale) {
                 await updateSale(selectedSale.idVenda, apiData);
             } else {
@@ -218,17 +218,19 @@ export default function Vendas() {
                                 </div>
                             </div>
                             <div className="flex gap-3">
-                                <Button 
-                                    onClick={handleExport} 
-                                    variant="secondary"
-                                    disabled={loadingExport}
-                                    className="flex-1 sm:flex-none"
-                                >
-                                    <Download className="w-4 h-4 mr-2" />
-                                    {loadingExport ? 'Exportando...' : 'Exportar'}
-                                </Button>
                                 {canModify && (
-                                    <Button 
+                                    <Button
+                                        onClick={handleExport}
+                                        variant="secondary"
+                                        disabled={loadingExport}
+                                        className="flex-1 sm:flex-none"
+                                    >
+                                        <Download className="w-4 h-4 mr-2" />
+                                        {loadingExport ? 'Exportando...' : 'Exportar'}
+                                    </Button>
+                                )}
+                                {canModify && (
+                                    <Button
                                         onClick={() => handleOpenModal()}
                                         className="flex-1 sm:flex-none"
                                     >
