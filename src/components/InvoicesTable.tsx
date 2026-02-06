@@ -1,5 +1,6 @@
 import { Loader2, FileText, Edit, Trash2, Calendar, User, DollarSign, CreditCard, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from './Button';
+import { Tooltip } from './Tooltip';
 import { formatCpfCnpj } from '../utils/formatters';
 
 interface Invoice {
@@ -260,12 +261,15 @@ export function InvoicesTable({ invoices, loading, onEdit, onDelete, canModify }
                                         </div>
                                     </div>
                                 </td>
-                                <td
-                                    className="px-6 py-4 text-sm text-gray-700 cursor-help"
-                                    title={invoice.descricao}
-                                    style={{ maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                                >
-                                    {invoice.descricao}
+                                <td className="px-6 py-4">
+                                    <Tooltip content={invoice.descricao}>
+                                        <div 
+                                            className="text-sm text-gray-700 cursor-help"
+                                            style={{ maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                                        >
+                                            {invoice.descricao}
+                                        </div>
+                                    </Tooltip>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-semibold text-orange-600">
                                     {formatCurrency(invoice.valor)}
