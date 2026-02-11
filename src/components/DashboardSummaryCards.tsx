@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from './Card';
 import { TrendingUp, TrendingDown, DollarSign, Wallet, CreditCard, Receipt } from 'lucide-react';
-import { formatCurrency } from '../utils/formatters';
+import { formatCurrency, parseCurrency } from '../utils/formatters';
 
 interface DashboardSummaryCardsProps {
     data: {
@@ -62,7 +62,7 @@ export function DashboardSummaryCards({ data }: DashboardSummaryCardsProps) {
                                 <p className="text-sm font-medium text-gray-600 truncate">
                                     {card.title}
                                 </p>
-                                <h3 className="text-2xl font-bold text-gray-900 mt-2">
+                                <h3 className={`text-2xl font-bold mt-2 ${parseCurrency(card.value) < 0 ? 'text-red-600' : 'text-gray-900'}`}>
                                     {formatCurrency(card.value)}
                                 </h3>
                                 {card.description && (
