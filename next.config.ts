@@ -8,8 +8,8 @@ const testCfg = {
     ignoreDuringBuilds: true,
   },
   env: {
-    completeUrl: "http://localhost:3001",
-    API_URL: "http://localhost:3001/api",
+    completeUrl: process.env.API_URL || "http://localhost:3000",
+    API_URL: `${process.env.API_URL || "http://localhost:3000"}/api`,
     version: version + "_dev",
     JWT_SECRET: process.env.JWT_SECRET,
     NEXT_PUBLIC_SITEKEY: "3x00000000000000000000FF",
@@ -22,8 +22,8 @@ const prodCfg = {
     ignoreDuringBuilds: true,
   },
   env: {
-    completeUrl: process.env.COMPLETE_URL,
-    API_URL: `${process.env.COMPLETE_URL}/api`,
+    completeUrl: process.env.API_URL,
+    API_URL: `${process.env.API_URL}/api`,
     https: version,
     JWT_SECRET: process.env.JWT_SECRET,
     NEXT_PUBLIC_SITEKEY: "0x4AAAAAAA0jPoN9DQzXX2Tg",

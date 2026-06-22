@@ -14,7 +14,7 @@ Interface web da loja Casa Alves. Aplicação frontend responsável pela gestão
 ## Variáveis de Ambiente
 
 ```env
-COMPLETE_URL    // URL da API (padrão: http://localhost:3001)
+API_URL    // URL da API (padrão: http://localhost:3001)
 NODE_ENV        // Ambiente de execução (development ou production)
 JWT_SECRET      // Chave secreta para validação dos tokens JWT
 ```

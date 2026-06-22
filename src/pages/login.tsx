@@ -84,7 +84,7 @@ export default function Login() {
                                 <Input
                                     label="Login"
                                     type="text"
-                                    placeholder="seu@email.com"
+                                    placeholder="seu.nome"
                                     value={login}
                                     onChange={(e) => {
                                         setLogin(e.target.value);
