@@ -40,10 +40,22 @@ export interface InvoiceFormData {
     descricao: string;
 }
 
+interface InvoiceFormState {
+    data: string;
+    valor: string;
+    dataVencimento: string;
+    dataPagamento: string;
+    status: string;
+    formaPagamento: string;
+    nomeFornecedor: string;
+    documentoFornecedor: string;
+    descricao: string;
+}
+
 export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: InvoiceModalProps) {
-    const [formData, setFormData] = useState<InvoiceFormData>({
+    const [formData, setFormData] = useState<InvoiceFormState>({
         data: '',
-        valor: 0,
+        valor: '',
         dataVencimento: '',
         dataPagamento: '',
         status: '',
@@ -57,7 +69,7 @@ export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: In
         if (invoice) {
             setFormData({
                 data: invoice.data.split('T')[0],
-                valor: parseFloat(invoice.valor),
+                valor: invoice.valor,
                 dataVencimento: invoice.dataVencimento.split('T')[0],
                 dataPagamento: invoice.dataPagamento ? invoice.dataPagamento.split('T')[0] : '',
                 status: typeof invoice.status === 'boolean' ? (invoice.status ? 'pago' : 'pendente') : invoice.status,
@@ -69,7 +81,7 @@ export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: In
         } else {
             setFormData({
                 data: '',
-                valor: 0,
+                valor: '',
                 dataVencimento: '',
                 dataPagamento: '',
                 status: '',
@@ -94,8 +106,9 @@ export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: In
         };
 
         // Adicionar campos opcionais apenas se tiverem valor
-        if (formData.valor && formData.valor > 0) {
-            submitData.valor = formData.valor;
+        const valor = parseFloat(formData.valor);
+        if (!isNaN(valor) && valor > 0) {
+            submitData.valor = valor;
         }
         if (formData.dataPagamento) {
             submitData.dataPagamento = formData.dataPagamento;
@@ -110,9 +123,10 @@ export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: In
         onSubmit(submitData);
     };
 
-    const formatCurrency = (value: number) => {
-        if (isNaN(value)) return 'R$ 0,00';
-        return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const formatCurrency = (value: string) => {
+        const numValue = parseFloat(value);
+        if (isNaN(numValue)) return 'R$ 0,00';
+        return numValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     };
 
     if (!isOpen) return null;
@@ -211,7 +225,7 @@ export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: In
                                 step="0.01"
                                 min="0"
                                 value={formData.valor}
-                                onChange={(e) => setFormData({ ...formData, valor: parseFloat(e.target.value) || 0 })}
+                                onChange={(e) => setFormData({ ...formData, valor: e.target.value })}
                                 placeholder="0.00"
                             />
                         </div>
@@ -238,11 +252,11 @@ export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: In
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                                 >
                                     <option value="">Selecione a forma de pagamento</option>
-                                    <option value="Boleto">Boleto</option>
+                                    <option value="Dinheiro">Dinheiro</option>
+                                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                    <option value="Débito em Conta">Débito em Conta</option>
                                     <option value="PIX">PIX</option>
-                                    <option value="DDA">DDA</option>
-                                    <option value="Débito">Débito</option>
-                                    <option value="Automático">Automático</option>
+                                    <option value="Transferência Bancária">Transferência Bancária</option>
                                 </select>
                             </div>
                         </div>
@@ -264,7 +278,7 @@ export function InvoiceModal({ isOpen, onClose, onSubmit, loading, invoice }: In
                             </select>
                         </div>
 
-                        {formData.valor !== undefined && formData.valor > 0 && (
+                        {formData.valor && (
                             <div className="pt-4 border-t border-gray-200">
                                 <div className="flex items-center justify-between">
                                     <span className="text-lg font-semibold text-gray-700">Valor:</span>

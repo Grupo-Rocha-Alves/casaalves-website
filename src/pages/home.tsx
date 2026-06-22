@@ -10,12 +10,13 @@ import { DashboardCharts } from '../components/DashboardCharts';
 import { DashboardDailyTable } from '../components/DashboardDailyTable';
 
 export default function Home() {
-    const { user, isAuthenticated, loading: authLoading } = useAuth();
+    const { isAuthenticated, loading: authLoading } = useAuth();
     const router = useRouter();
+    const currentDate = new Date();
     
     // State for filters
-    const [month, setMonth] = useState(new Date().getMonth());
-    const [year, setYear] = useState(new Date().getFullYear());
+    const [month, setMonth] = useState(currentDate.getMonth() + 1);
+    const [year, setYear] = useState(currentDate.getFullYear());
 
     const { dashboard, loading: dashboardLoading, getDashboard } = useQueryGetDashboard();
 
